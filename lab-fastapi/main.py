@@ -1,7 +1,11 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
+import students
+
 app = FastAPI()
+
+app.include_router(students.router, prefix="/students")
 
 # Define Pydantic models
 
@@ -9,8 +13,8 @@ class StudentCreateSchema(BaseModel):
     first_name: str
     last_name: str
 
-    class Config:
-        schema_extra = {"message": "Hello World"}
+class Config:
+    schema_extra = {"message": "Hello World"}
 
 
 class Student(BaseModel):
